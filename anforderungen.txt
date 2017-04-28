@@ -1,0 +1,10 @@
+Services
+- User Registration
+- Login
+- Logout
+- Change Userdata (Username, Password)
+- View Userdata
+- View Persondata (Name, Address, …)
+- Change Persondata
+- (Forgot Password-Service)
+-
