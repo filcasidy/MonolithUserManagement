@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>user-management</name>
-	<description>Demo project for Spring Boot</description>
+	<description>User-Management for the Monolith webshop</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
