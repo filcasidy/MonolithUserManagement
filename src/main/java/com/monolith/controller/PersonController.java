@@ -1,0 +1,43 @@
+package com.monolith.controller;
+
+import com.monolith.domain.Person;
+import com.monolith.service.PersonService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
+
+/**
+ * Rest-Controller of the person.
+ */
+@RestController
+public class PersonController {
+
+    @Autowired
+    PersonService personService;
+
+    /**
+     * Get all persons route.
+     * @return the list with all persons
+     */
+    @RequestMapping(value = "/persons", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Collection<Person>> getPersons() {
+        Collection<Person> persons = personService.findAll();
+        return new ResponseEntity<Collection<Person>>(persons, HttpStatus.OK);
+    }
+
+    /**
+     * Create person route.
+     * @param firstName of the person
+     * @param lastName of the person
+     * @return JSON-Response of the new Person
+     */
+    @RequestMapping(value = "/persons", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Person> createPerson(@RequestParam(name = "firstname") String firstName, @RequestParam(name = "lastname") String lastName) {
+        Person saved = personService.create(new Person(firstName, lastName));
+        return new ResponseEntity<Person>(saved, HttpStatus.CREATED);
+    }
+}
