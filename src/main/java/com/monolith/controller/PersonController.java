@@ -35,7 +35,7 @@ public class PersonController {
      * @param lastName of the person
      * @return JSON-Response of the new Person
      */
-    @RequestMapping(value = "/persons", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/create/person", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Person> createPerson(@RequestParam(name = "firstname") String firstName, @RequestParam(name = "lastname") String lastName) {
         Person saved = personService.create(new Person(firstName, lastName));
         return new ResponseEntity<Person>(saved, HttpStatus.CREATED);
