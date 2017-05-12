@@ -1,57 +1,50 @@
 package com.monolith.service;
 
-import com.monolith.domain.Person;
-import com.monolith.domain.PersonRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
+import com.monolith.domain.Person;
+
 /**
- * Default implementation of a person.
+ * The person interface with different interactions.
  */
-@Service
-public class PersonService implements PersonInterface {
+public interface PersonService {
 
-    @Autowired
-    PersonRepository personRepository;
+    /**
+     * Find all persons.
+     *
+     * @return the list with all found persons
+     */
+    List<Person> findAll();
 
-    public Person addPerson(Person person) {
-        return personRepository.save(person);
-    }
 
-    @Override
-    public List<Person> findAll() {
-        return personRepository.findAll();
-    }
+    /**
+     * Find the specific person.
+     *
+     * @param id of the searched person
+     * @return the searched person
+     */
+    Person findOne(Long id);
 
-    @Override
-    public Person findOne(Long id) {
-        return personRepository.findOne(id);
-    }
+    /**
+     * Creates a person.
+     *
+     * @param person to be created
+     * @return the created person
+     */
+    Person create(Person person);
 
-    @Override
-    public Person create(Person person) {
+    /**
+     * Updates the person.
+     *
+     * @param person to be updated
+     * @return the updated person
+     */
+    Person update(Person person);
 
-        if (person.getId() != null) {
-            return null;
-        }
-        return personRepository.save(person);
-    }
-
-    @Override
-    public Person update(Person person) {
-        Person persistedPerson = personRepository.findOne(person.getId());
-
-        if (persistedPerson == null) {
-            return null;
-        }
-
-        return personRepository.save(person);
-    }
-
-    @Override
-    public void delete(long id) {
-        personRepository.delete(id);
-    }
+    /**
+     * Delete specific person
+     *
+     * @param id of the person which should be deleted
+     */
+    void delete(long id);
 }
