@@ -26,6 +26,14 @@ public interface UserService {
     User findOne(Long id);
 
     /**
+     * Find the person by the username.
+     *
+     * @param userName the name of the user
+     * @return the person of this user
+     */
+    User findUserByUsername(String userName);
+
+    /**
      * Creates a person.
      *
      * @param user to be created

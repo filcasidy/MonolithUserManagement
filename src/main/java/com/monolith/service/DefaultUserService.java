@@ -31,6 +31,12 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
+    public User findUserByUsername(String username) {
+        return userRepository.findUserByUsername(username);
+    }
+
+
+    @Override
     public User create(User user) {
 
         if (user.getId() != null) {
