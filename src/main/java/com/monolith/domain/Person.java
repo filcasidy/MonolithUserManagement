@@ -7,7 +7,7 @@ import javax.persistence.*;
  * Entity of the person.
  */
 @Entity
-@Table(name = "Person")
+@Table(name = "person")
 public class Person {
 
     @Id
@@ -20,12 +20,19 @@ public class Person {
     @Column(name = "lastName")
     private String lastName;
 
+    @OneToOne
+    private User user;
+
     public Person(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
     public Person() {
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Long getId() {
@@ -52,10 +59,12 @@ public class Person {
         this.lastName = lastName;
     }
 
+
     @Override
     public String toString() {
         return String.format(
-                "Person[id=%d, firstName='%s', lastName='%s']",
-                id, firstName, lastName);
+                "Person[user_id=%d, firstName='%s', lastName='%s']",
+                user.getId(), firstName, lastName);
     }
+
 }
