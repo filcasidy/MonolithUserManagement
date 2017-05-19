@@ -42,4 +42,16 @@ public class PersonController {
         Person saved = personService.create(person);
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
+
+    /**
+     * Update person route.
+     *
+     * @param person the {@link Person} object
+     * @return JSON-Response of the updated Person
+     */
+    @RequestMapping(value = "/update/person", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Person> updatePerson(@RequestBody Person person) {
+        Person updated = personService.update(person);
+        return new ResponseEntity<>(updated, HttpStatus.OK);
+    }
 }
