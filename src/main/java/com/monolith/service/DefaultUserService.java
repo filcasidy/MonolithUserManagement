@@ -1,11 +1,12 @@
 package com.monolith.service;
 
+import java.util.List;
+
 import com.monolith.domain.User;
 import com.monolith.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Default implementation of a person.
@@ -15,6 +16,9 @@ public class DefaultUserService implements UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     public User addPerson(User user) {
         return userRepository.save(user);
@@ -42,6 +46,11 @@ public class DefaultUserService implements UserService {
         if (user.getId() != null) {
             return null;
         }
+        //        User newUser = new User();
+        //        newUser.setId(user.getId());
+        //        newUser.setPerson(user.getPerson());
+        //        newUser.setUsername(user.getUsername());
+        //        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
