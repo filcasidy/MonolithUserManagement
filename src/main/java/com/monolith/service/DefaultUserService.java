@@ -5,6 +5,9 @@ import java.util.List;
 import com.monolith.domain.User;
 import com.monolith.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +15,7 @@ import org.springframework.stereotype.Service;
  * Default implementation of a person.
  */
 @Service
-public class DefaultUserService implements UserService {
+public class DefaultUserService implements UserService, UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
@@ -68,5 +71,14 @@ public class DefaultUserService implements UserService {
     @Override
     public void delete(long id) {
         userRepository.delete(id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findUserByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException(username);
+        }
+        return new UserPrincipal(user);
     }
 }
