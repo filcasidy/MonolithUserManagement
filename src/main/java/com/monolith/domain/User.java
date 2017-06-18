@@ -30,7 +30,10 @@ public class User {
     public User(String username, String password, Person person) {
         this.username = username;
         this.password = password;
-        this.person.setUser(this);
+        if (person != null) {
+            this.person = person;
+            this.person.setUser(this);
+        }
     }
 
     public User() {

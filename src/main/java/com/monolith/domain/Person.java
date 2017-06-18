@@ -14,18 +14,22 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "firstName")
-    private String firstName;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "lastName")
+    @Column(name = "lastname")
     private String lastName;
+
+    @Column(name = "email")
+    private String email;
 
     @OneToOne
     private User user;
 
-    public Person(String firstName, String lastName) {
-        this.firstName = firstName;
+    public Person(String name, String lastName, String email) {
+        this.name = name;
         this.lastName = lastName;
+        this.email = email;
     }
 
     public Person() {
@@ -43,12 +47,12 @@ public class Person {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLastName() {
@@ -59,12 +63,22 @@ public class Person {
         this.lastName = lastName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     @Override
     public String toString() {
+        String userId = "";
+        if (user != null) {
+            userId = user.getId().toString();
+        }
         return String.format(
-                "Person[user_id=%d, firstName='%s', lastName='%s']",
-                user.getId(), firstName, lastName);
+                "Person[user_id=%s, name='%s', lastName='%s', email='%s']",
+                userId, name, lastName, email);
     }
-
 }

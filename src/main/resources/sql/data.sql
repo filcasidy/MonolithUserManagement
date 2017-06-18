@@ -5,4 +5,4 @@
 -- INSERT INTO Person VALUES(6,'Michelle', 'Dessler');
 
 INSERT INTO User (id, username, password) VALUES (1, 'barts', 'password');
-INSERT INTO Person VALUES (2, 'Bart', 'Simpson', 1);
+INSERT INTO Person (id, name, email, lastname, user_id) VALUES (2, 'Bart', 'bla@bla.com', 'Simpson', 1);
