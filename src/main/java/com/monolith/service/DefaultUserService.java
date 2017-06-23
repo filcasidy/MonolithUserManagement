@@ -42,19 +42,18 @@ public class DefaultUserService implements UserService, UserDetailsService {
         return userRepository.findUserByUsername(username);
     }
 
-
     @Override
     public User create(User user) {
 
         if (user.getId() != null) {
             return null;
         }
-        //        User newUser = new User();
-        //        newUser.setId(user.getId());
-        //        newUser.setPerson(user.getPerson());
-        //        newUser.setUsername(user.getUsername());
-        //        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+        User newUser = new User();
+        newUser.setId(user.getId());
+        newUser.setPerson(user.getPerson());
+        newUser.setUsername(user.getUsername());
+        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(newUser);
     }
 
     @Override
@@ -77,7 +76,7 @@ public class DefaultUserService implements UserService, UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findUserByUsername(username);
         if (user == null) {
-            throw new UsernameNotFoundException(username);
+            throw new UsernameNotFoundException(username + " does not exist!");
         }
         return new UserPrincipal(user);
     }
