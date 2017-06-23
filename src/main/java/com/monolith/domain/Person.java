@@ -18,7 +18,7 @@ public class Person {
     private String name;
 
     @Column(name = "lastname")
-    private String lastName;
+    private String lastname;
 
     @Column(name = "email")
     private String email;
@@ -26,9 +26,9 @@ public class Person {
     @OneToOne
     private User user;
 
-    public Person(String name, String lastName, String email) {
+    public Person(String name, String lastname, String email) {
         this.name = name;
-        this.lastName = lastName;
+        this.lastname = lastname;
         this.email = email;
     }
 
@@ -55,12 +55,12 @@ public class Person {
         this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -78,7 +78,7 @@ public class Person {
             userId = user.getId().toString();
         }
         return String.format(
-                "Person[user_id=%s, name='%s', lastName='%s', email='%s']",
-                userId, name, lastName, email);
+                "Person[user_id=%s, name='%s', lastname='%s', email='%s']",
+                userId, name, lastname, email);
     }
 }
