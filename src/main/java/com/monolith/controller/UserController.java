@@ -7,10 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
@@ -49,13 +46,31 @@ public class UserController {
         return new ResponseEntity<>(userService.findUserByUsername(username), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/create/user", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    /**
+     * Create new user.
+     *
+     * @param request with user information
+     * @return new user entity
+     */
+    @RequestMapping(value = "/user/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<User> createUser(HttpServletRequest request) {
         User user = new User();
         //todo Daten müssen aus dem Requestbody geholt werden
         user.setUsername(request.getHeader("username"));
         user.setPassword(passwordEncoder.encode(request.getHeader("password")));
         return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    /**
+     * Edit user route.
+     *
+     * @param user the edited {@link User} object
+     * @return JSON-Response of the edited user
+     */
+    @RequestMapping(value = "/user/edit", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<User> editPerson(@RequestBody User user) {
+        User updated = userService.update(user);
+        return new ResponseEntity<>(updated, HttpStatus.OK);
     }
 
 }

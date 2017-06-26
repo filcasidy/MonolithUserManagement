@@ -1,11 +1,11 @@
 package com.monolith.service;
 
-import java.util.List;
-
 import com.monolith.domain.Person;
 import com.monolith.domain.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Default implementation of a person.
@@ -46,7 +46,6 @@ public class DefaultPersonService implements PersonService {
         if (persistedPerson == null) {
             return null;
         }
-
         return personRepository.save(person);
     }
 

@@ -24,6 +24,7 @@ public class PersonController {
 
     /**
      * Get all persons route.
+     *
      * @return the list with all persons
      */
     @RequestMapping(value = "/persons", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -34,23 +35,24 @@ public class PersonController {
 
     /**
      * Create person route.
+     *
      * @param person the {@link Person} object
      * @return JSON-Response of the new Person
      */
-    @RequestMapping(value = "/create/person", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/person/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Person> createPerson(@RequestBody Person person) {
         Person saved = personService.create(person);
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 
     /**
-     * Update person route.
+     * Edit person route.
      *
-     * @param person the {@link Person} object
-     * @return JSON-Response of the updated Person
+     * @param person the edited {@link Person} object
+     * @return JSON-Response of the edited Person
      */
-    @RequestMapping(value = "/update/person", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<Person> updatePerson(@RequestBody Person person) {
+    @RequestMapping(value = "/person/edit", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<Person> editPerson(@RequestBody Person person) {
         Person updated = personService.update(person);
         return new ResponseEntity<>(updated, HttpStatus.OK);
     }

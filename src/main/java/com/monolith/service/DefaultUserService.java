@@ -1,7 +1,5 @@
 package com.monolith.service;
 
-import java.util.List;
-
 import com.monolith.domain.User;
 import com.monolith.domain.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +8,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Default implementation of a person.
@@ -63,7 +63,12 @@ public class DefaultUserService implements UserService, UserDetailsService {
         if (persistedUser == null) {
             return null;
         }
-
+        if (user.getPassword() == null) {
+            user.setPassword(persistedUser.getPassword());
+        }
+        if (user.getPerson() == null) {
+            user.setPerson(persistedUser.getPerson());
+        }
         return userRepository.save(user);
     }
 

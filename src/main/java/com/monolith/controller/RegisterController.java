@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Controller for registration.
+ */
 @RestController
 public class RegisterController {
 

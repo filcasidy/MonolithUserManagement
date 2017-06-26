@@ -19,7 +19,8 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToOne
+    @PrimaryKeyJoinColumn
     private Person person;
 
     public User(String username, String password) {
