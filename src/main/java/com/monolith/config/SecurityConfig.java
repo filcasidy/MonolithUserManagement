@@ -27,12 +27,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/*").authenticated()
-                .antMatchers("/account/**").authenticated()
-                .antMatchers("/users").authenticated()
+                .anyRequest().authenticated()
                 .antMatchers("/console/**").permitAll()
                 .antMatchers("/create/user").permitAll()
-                .antMatchers("/user").authenticated()
+                .antMatchers("/ui-swagger.html").permitAll()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
@@ -43,7 +41,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()
                 .and()
                 .addFilterAfter(new CustomFilter(), BasicAuthenticationFilter.class);
-        ;
     }
 
     @Autowired
