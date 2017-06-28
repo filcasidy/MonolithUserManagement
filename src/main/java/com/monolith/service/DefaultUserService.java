@@ -48,12 +48,8 @@ public class DefaultUserService implements UserService, UserDetailsService {
         if (user.getId() != null) {
             return null;
         }
-        User newUser = new User();
-        newUser.setId(user.getId());
-        newUser.setPerson(user.getPerson());
-        newUser.setUsername(user.getUsername());
-        newUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        return userRepository.save(newUser);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        return userRepository.save(user);
     }
 
     @Override

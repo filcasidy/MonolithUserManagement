@@ -22,9 +22,13 @@ import java.util.List;
 @RestController
 public class RegisterController {
 
+    private static final String NAME = "name";
+    private static final String LASTNAME = "lastname";
+    private static final String EMAIL = "email";
+    private static final String USERNAME = "username";
+    private static final String PASSWORD = "password";
     @Autowired
     PersonService personService;
-
     @Autowired
     UserService userService;
 
@@ -33,14 +37,14 @@ public class RegisterController {
      *
      * @param userInformationMap contains name, lastname, email, username and password
      */
-    @RequestMapping(value = "/register-user", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @RequestMapping(value = "/user/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     ResponseEntity<HttpStatus> registerUser(@RequestBody MultiValueMap<String, String> userInformationMap) {
         Person person = null;
-        List<String> name = userInformationMap.get("name");
-        List<String> lastname = userInformationMap.get("lastname");
-        List<String> email = userInformationMap.get("email");
-        List<String> username = userInformationMap.get("username");
-        List<String> password = userInformationMap.get("password");
+        List<String> name = userInformationMap.get(NAME);
+        List<String> lastname = userInformationMap.get(LASTNAME);
+        List<String> email = userInformationMap.get(EMAIL);
+        List<String> username = userInformationMap.get(USERNAME);
+        List<String> password = userInformationMap.get(PASSWORD);
         if (!name.isEmpty() || !lastname.isEmpty() || !email.isEmpty()) {
             person = personService.create(new Person(name.get(0), lastname.get(0), email.get(0)));
         }

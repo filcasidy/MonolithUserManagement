@@ -19,8 +19,8 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @OneToOne
-    @PrimaryKeyJoinColumn
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "person_id")
     private Person person;
 
     public User(String username, String password) {

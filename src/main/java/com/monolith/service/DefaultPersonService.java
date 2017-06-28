@@ -32,7 +32,6 @@ public class DefaultPersonService implements PersonService {
 
     @Override
     public Person create(Person person) {
-
         if (person.getId() != null) {
             return null;
         }

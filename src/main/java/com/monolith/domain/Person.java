@@ -23,9 +23,7 @@ public class Person {
     @Column(name = "email")
     private String email;
 
-    @MapsId
-    @OneToOne
-    @JoinColumn(name = "id")
+    @OneToOne(mappedBy = "person")
     private User user;
 
     public Person(String name, String lastname, String email) {
