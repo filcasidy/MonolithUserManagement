@@ -1,7 +1,7 @@
 package com.monolith.config;
 
 import com.monolith.security.CustomAuthenticationProvider;
-import com.monolith.security.MyBasicAuthenticationEntryPoint;
+import com.monolith.security.CustomBasicAuthenticationEntryPoint;
 import com.monolith.service.DefaultUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -18,7 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     DefaultUserService userService;
 
     @Autowired
-    private MyBasicAuthenticationEntryPoint basicAuthenticationEntryPoint;
+    private CustomBasicAuthenticationEntryPoint basicAuthenticationEntryPoint;
 
     @Autowired
     private CustomAuthenticationProvider authenticationProvider;
