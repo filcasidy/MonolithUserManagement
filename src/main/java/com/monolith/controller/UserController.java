@@ -88,7 +88,7 @@ public class UserController {
         if (arePasswordsEmpty(oldPassword, newPassword)) {
             persistedUser.setUsername(newUsername);
         } else {
-            if (arePasswordsEqual(newPassword, persistedUser)) {
+            if (!passwordEncoder.matches(oldPassword, persistedUser.getPassword())) {
                 return new ResponseEntity<>((User) null, HttpStatus.BAD_REQUEST);
             } else {
                 persistedUser.setPassword(passwordEncoder.encode(newPassword));
@@ -97,10 +97,6 @@ public class UserController {
         }
 
         return new ResponseEntity<>(userService.update(persistedUser), HttpStatus.OK);
-    }
-
-    private boolean arePasswordsEqual(String newPassword, User persistedUser) {
-        return persistedUser.getPassword().equals(passwordEncoder.encode(newPassword));
     }
 
     private boolean arePasswordsEmpty(String oldPassword, String newPassword) {
