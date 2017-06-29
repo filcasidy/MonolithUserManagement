@@ -27,11 +27,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .anyRequest().authenticated()
-                .antMatchers("/console/**").permitAll()
                 .antMatchers("/user/register").permitAll()
-                .antMatchers("/user/create").permitAll()
-                .antMatchers("/ui-swagger.html").permitAll()
+                .antMatchers("/login").authenticated()
+                .antMatchers("/user/edit").authenticated()
+                .antMatchers("/person/edit").authenticated()
+                .antMatchers("/users").authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
