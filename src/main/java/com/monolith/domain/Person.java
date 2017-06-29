@@ -1,7 +1,12 @@
 package com.monolith.domain;
 
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 /**
  * Entity of the person.
@@ -15,10 +20,10 @@ public class Person {
     private Long id;
 
     @Column(name = "name")
-    private String name;
+    private String firstName;
 
-    @Column(name = "lastname")
-    private String lastname;
+    @Column(name = "lastName")
+    private String lastName;
 
     @Column(name = "email")
     private String email;
@@ -26,9 +31,9 @@ public class Person {
     @OneToOne(mappedBy = "person")
     private User user;
 
-    public Person(String name, String lastname, String email) {
-        this.name = name;
-        this.lastname = lastname;
+    public Person(String firstName, String lastname, String email) {
+        this.firstName = firstName;
+        this.lastName = lastname;
         this.email = email;
     }
 
@@ -47,20 +52,20 @@ public class Person {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -78,7 +83,7 @@ public class Person {
             userId = user.getId().toString();
         }
         return String.format(
-                "Person[user_id=%s, name='%s', lastname='%s', email='%s']",
-                userId, name, lastname, email);
+                "Person[user_id=%s, firstName='%s', lastName='%s', email='%s']",
+                userId, firstName, lastName, email);
     }
 }
