@@ -20,10 +20,10 @@ public class Person {
     private Long id;
 
     @Column(name = "name")
-    private String firstName;
+    private String name;
 
-    @Column(name = "lastName")
-    private String lastName;
+    @Column(name = "lastname")
+    private String lastname;
 
     @Column(name = "email")
     private String email;
@@ -31,9 +31,9 @@ public class Person {
     @OneToOne(mappedBy = "person")
     private User user;
 
-    public Person(String firstName, String lastname, String email) {
-        this.firstName = firstName;
-        this.lastName = lastname;
+    public Person(String name, String lastname, String email) {
+        this.name = name;
+        this.lastname = lastname;
         this.email = email;
     }
 
@@ -52,20 +52,20 @@ public class Person {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -83,7 +83,7 @@ public class Person {
             userId = user.getId().toString();
         }
         return String.format(
-                "Person[user_id=%s, firstName='%s', lastName='%s', email='%s']",
-                userId, firstName, lastName, email);
+                "Person[user_id=%s, name='%s', lastname='%s', email='%s']",
+                userId, name, lastname, email);
     }
 }
