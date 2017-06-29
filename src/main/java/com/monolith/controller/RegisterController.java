@@ -6,6 +6,7 @@ import com.monolith.domain.Person;
 import com.monolith.domain.User;
 import com.monolith.service.PersonService;
 import com.monolith.service.UserService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,9 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controller for registration.
+ * Rest-Controller for registration.
  */
 @RestController
+@Api(value = "RegisterController", description = "Rest-Controller for registration.")
 public class RegisterController {
 
     private static final String NAME = "name";
@@ -30,6 +32,7 @@ public class RegisterController {
 
     @Autowired
     PersonService personService;
+
     @Autowired
     UserService userService;
 

@@ -1,23 +1,30 @@
 package com.monolith.controller;
 
+import java.util.Collection;
+
+import javax.servlet.http.HttpServletRequest;
+
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.monolith.domain.User;
 import com.monolith.service.UserService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Collection;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Rest-Controller of the user.
  */
 @RestController
+@Api(value = "UserController", description = "Rest-Controller of the user.")
 public class UserController {
 
     @Autowired
