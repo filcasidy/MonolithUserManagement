@@ -55,9 +55,11 @@ public class DefaultUserService implements UserService, UserDetailsService {
     @Override
     public User update(User user) {
         User persistedUser = userRepository.findOne(user.getId());
-
         if (persistedUser == null) {
-            return null;
+            persistedUser = findUserByUsername(user.getUsername());
+            if (persistedUser == null) {
+                return null;
+            }
         }
         if (user.getPassword() == null) {
             user.setPassword(persistedUser.getPassword());

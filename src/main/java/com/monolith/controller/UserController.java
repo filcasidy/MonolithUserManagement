@@ -1,5 +1,7 @@
 package com.monolith.controller;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.monolith.domain.User;
 import com.monolith.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,13 +66,53 @@ public class UserController {
     /**
      * Edit user route.
      *
-     * @param user the edited {@link User} object
+     * @param userAsJson the user information
+     *                   it should contain: oldUsername, newUsername, oldPassword and newPassword.
      * @return JSON-Response of the edited user
      */
     @RequestMapping(value = "/user/edit", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<User> editPerson(@RequestBody User user) {
-        User updated = userService.update(user);
-        return new ResponseEntity<>(updated, HttpStatus.OK);
+    ResponseEntity<User> editPerson(@RequestBody String userAsJson) {
+        JsonParser parser = new JsonParser();
+        JsonObject user = parser.parse(userAsJson).getAsJsonObject();
+        String oldUsername = getValue(user, "oldUsername");
+        String newUsername = getValue(user, "newUsername");
+        String oldPassword = getValue(user, "oldPassword");
+        String newPassword = getValue(user, "newPassword");
+        User persistedUser = userService.findUserByUsername(oldUsername);
+
+        // XOR if one of the passwords is given then 400
+        if (!oldPassword.isEmpty() ^ !newPassword.isEmpty()) {
+            return new ResponseEntity<>((User) null, HttpStatus.BAD_REQUEST);
+        }
+
+        if (arePasswordsEmpty(oldPassword, newPassword)) {
+            persistedUser.setUsername(newUsername);
+        } else {
+            if (arePasswordsEqual(newPassword, persistedUser)) {
+                return new ResponseEntity<>((User) null, HttpStatus.BAD_REQUEST);
+            } else {
+                persistedUser.setPassword(passwordEncoder.encode(newPassword));
+                persistedUser.setUsername(newUsername);
+            }
+        }
+
+        return new ResponseEntity<>(userService.update(persistedUser), HttpStatus.OK);
+    }
+
+    private boolean arePasswordsEqual(String newPassword, User persistedUser) {
+        return persistedUser.getPassword().equals(passwordEncoder.encode(newPassword));
+    }
+
+    private boolean arePasswordsEmpty(String oldPassword, String newPassword) {
+        return newPassword.isEmpty() && oldPassword.isEmpty();
+    }
+
+    private String getValue(JsonObject jsonObject, String attributeName) {
+        if (jsonObject.get(attributeName) == null || jsonObject.get(attributeName).isJsonNull()) {
+            return null;
+        } else {
+            return jsonObject.get(attributeName).getAsString();
+        }
     }
 
 }
