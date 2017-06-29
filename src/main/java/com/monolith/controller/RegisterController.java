@@ -7,6 +7,7 @@ import com.monolith.domain.User;
 import com.monolith.service.PersonService;
 import com.monolith.service.UserService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -41,6 +42,7 @@ public class RegisterController {
      *
      * @param userInformationMap contains name, lastname, email, username and password
      */
+    @ApiOperation(value = "Create/register a user object and persist it.", response = HttpStatus.class)
     @RequestMapping(value = "/user/register", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     ResponseEntity<HttpStatus> registerUser(@RequestBody MultiValueMap<String, String> userInformationMap) {
         Person person = null;

@@ -9,6 +9,7 @@ import com.google.gson.JsonParser;
 import com.monolith.domain.User;
 import com.monolith.service.UserService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -38,6 +39,7 @@ public class UserController {
      *
      * @return the list with all users
      */
+    @ApiOperation(value = "Get a list with all users.", response = Collection.class)
     @RequestMapping(value = "/users", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<Collection<User>> getUsers() {
         Collection<User> users = userService.findAll();
@@ -50,6 +52,7 @@ public class UserController {
      * @param username the name of the user
      * @return the user with all information
      */
+    @ApiOperation(value = "Get the user with the given username.", response = User.class)
     @RequestMapping(value = "/user", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<User> getUser(@RequestParam("username") String username) {
         return new ResponseEntity<>(userService.findUserByUsername(username), HttpStatus.OK);
@@ -61,6 +64,7 @@ public class UserController {
      * @param request with user information
      * @return new user entity
      */
+    @ApiOperation(value = "Create a user object and persist it.", response = User.class)
     @RequestMapping(value = "/user/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<User> createUser(HttpServletRequest request) {
         User user = new User();
@@ -77,6 +81,7 @@ public class UserController {
      *                   it should contain: oldUsername, newUsername, oldPassword and newPassword.
      * @return JSON-Response of the edited user
      */
+    @ApiOperation(value = "Update a user in the database.", response = User.class)
     @RequestMapping(value = "/user/edit", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<User> editPerson(@RequestBody String userAsJson) {
         JsonParser parser = new JsonParser();
