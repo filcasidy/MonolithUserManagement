@@ -23,15 +23,27 @@ Das User-Management kann per REST-Aufrufe angesprochen werden. Dazu wird **Sprin
 Für die Persistierung der Daten ist eine **H2-Datenbank** implementiert, auf die per **Spring Data** zugegriffen werden kann.
 Die Dokumentation der REST-Routen ist mit **Swagger** realisiert.
 
-## 4. Dokumentation
+## 4. Architektur
+Der Microservice ist in einer Drei-Schichten-Architektur aufgebaut.
+- 3 Schichten -> 3 packages
+- Zugriff von oben nach unten
+- 1. controller (Rest) -> Zugriff per REST von außen, controller greifen auf service Schicht zu
+- 2. service -> greifen auf Repositories in domain Schicht zu 
+- 3. domain -> Persistenzschicht, Abbildung der Entitäten (User, Person), Zugriff auf die Datenbank
 
-## 5. Teststruktur
+## 5. Dokumentation
 
-## 6. Lokales Starten der Anwendung
+## 6. Teststruktur
+
+## 7. Lokales Starten der Anwendung
 Um den Monolith im Zusammenspiel mit dem Microservice lokal zu testen, müssen zunächst folgende Git-Repositories ausgecheckt werden:
 
 https://gitlab.com/filcasidy/monolith (Monolith)
 
 https://github.com/filcasidy/MonolithUserManagement (Microservice)
 
+Der Monolith wird, wie auf der Gitlab-Seite beschrieben, gestartet. Der Microservice wird über die Klasse /src/main/java/com/monolith/UserManagementApplication.java gestartet. Zu beachten ist, dass der Microservice auf Port 8083 und der Monolith auf Port 8443 läuft.
 
+Sind beide Anwendungen gestartet, kann der Webshop über folgenden Link erreicht werden:
+
+https://localhost:8443/
