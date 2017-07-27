@@ -1,7 +1,5 @@
 package com.monolith.controller;
 
-import java.util.Collection;
-
 import com.monolith.domain.Person;
 import com.monolith.service.PersonService;
 import io.swagger.annotations.Api;
@@ -14,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collection;
 
 /**
  * Rest-Controller of the person.

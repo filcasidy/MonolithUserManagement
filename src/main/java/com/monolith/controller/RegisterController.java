@@ -1,7 +1,5 @@
 package com.monolith.controller;
 
-import java.util.List;
-
 import com.monolith.domain.Person;
 import com.monolith.domain.User;
 import com.monolith.service.PersonService;
@@ -17,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * Rest-Controller for registration.

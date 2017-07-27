@@ -1,8 +1,8 @@
 package com.monolith.service;
 
-import java.util.List;
-
 import com.monolith.domain.Person;
+
+import java.util.List;
 
 /**
  * The person interface with different interactions.

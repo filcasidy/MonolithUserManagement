@@ -1,9 +1,5 @@
 package com.monolith.controller;
 
-import java.util.Collection;
-
-import javax.servlet.http.HttpServletRequest;
-
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.monolith.domain.User;
@@ -15,11 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
 
 /**
  * Rest-Controller of the user.
@@ -55,7 +50,10 @@ public class UserController {
     @ApiOperation(value = "Get the user with the given username.", response = User.class)
     @RequestMapping(value = "/user", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<User> getUser(@RequestParam("username") String username) {
-        return new ResponseEntity<>(userService.findUserByUsername(username), HttpStatus.OK);
+        return ResponseEntity
+                .ok()
+                .header("Accept", "application/json")
+                .body(userService.findUserByUsername(username));
     }
 
     /**
@@ -68,7 +66,6 @@ public class UserController {
     @RequestMapping(value = "/user/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<User> createUser(HttpServletRequest request) {
         User user = new User();
-        //todo Daten müssen aus dem Requestbody geholt werden
         user.setUsername(request.getHeader("username"));
         user.setPassword(passwordEncoder.encode(request.getHeader("password")));
         return new ResponseEntity<>(user, HttpStatus.OK);

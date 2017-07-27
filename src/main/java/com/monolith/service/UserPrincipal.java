@@ -1,10 +1,10 @@
 package com.monolith.service;
 
-import java.util.Collection;
-
 import com.monolith.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 
 public class UserPrincipal implements UserDetails {
 
