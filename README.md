@@ -34,10 +34,14 @@ Der Microservice ist in einer Drei-Schichten-Architektur aufgebaut, die sich aus
 
 ## 5. Sicherheit
 Um den Microservice abzusichern, wird Spring Security eingesetzt. Dabei muss zwischen Client- und Server-Seite unterschieden werden.
+
 **Client**
+
 Auf dem Client (Webshop) wird Spring Security verwendet, um die Sessions zu verwalten. Wenn sich ein Nutzer einloggt, wird ein *Authentication*-Objekt mit Nutzername und Passwort in der Session gespeichert. Bei einem Logout oder Timeout wird die Session invalidiert. Als Authentifizierungsmethode wird Basic Authentication genutzt. Dabei werden bei jedem Request die Nutzerdaten (Nutzername, Passwort) mitgeschickt, um den Nutzer zu authentifizieren.
 Weiterhin ist der Client durch HTTPS verschlüsselt.
+
 **Server**
+
 Auf dem Server (Microservice) ist ein *AuthenticationProvider* implementiert, der bei einem Request überprüft, ob der Nutzer authentifiziert ist. 
 Um die Passwörter verschlüsselt zu speichern, wird der *BCryptPasswordEncoder* von Spring Security verwendet. So stehen die Passwörter nicht als Klartext in der Datenbank und können nicht einfach ausgelesen werden.
 
