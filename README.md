@@ -24,18 +24,22 @@ Für die Persistierung der Daten ist eine **H2-Datenbank** implementiert, auf di
 Die Dokumentation der REST-Routen ist mit **Swagger** realisiert.
 
 ## 4. Architektur
-Der Microservice ist in einer Drei-Schichten-Architektur aufgebaut.
-- 3 Schichten -> 3 packages
-- Zugriff von oben nach unten
-- 1. controller (Rest) -> Zugriff per REST von außen, controller greifen auf service Schicht zu
-- 2. service -> greifen auf Repositories in domain Schicht zu 
-- 3. domain -> Persistenzschicht, Abbildung der Entitäten (User, Person), Zugriff auf die Datenbank
+Der Microservice ist in einer Drei-Schichten-Architektur aufgebaut, die sich aus den Projekt-Packages *controller*, *service* und *domain* zusammensetzen. Der Zugriff geschieht bei den Schichten immer von oben nach unten.
 
-## 5. Dokumentation
+**1. Controller:** Die oberste Schicht (*controller*) wird von außen per REST angesprochen und dient so als Schnittstelle zu anderen Anwendungen (in diesem Fall der Monolith).
 
-## 6. Teststruktur
+**2. Service:** Die mittlere Schicht (*service*) beinhaltet die Logik und wird von den Controllern genutzt, um Requests zu verarbeiten. Die Services bestehen aus Interfaces und entsprechenden Implementierungen. Genutzt werden in den Controllern die Interfaces, wodurch die Implementierung bei Bedarf einfach ausgetauscht werden kann.
 
-## 7. Lokales Starten der Anwendung
+**3. Domain:** In der untersten Schicht (*domain*) erfolgt die Persistierung. Hier werden die Entitäten (User, Person) abgebildet und Datenbankoperationen ausgeführt. Die Services greifen auf die Repositories in der Persistenzschicht zu, um Daten in der Datenbank abzurufen oder anzupassen. Als Repository wird das *JpaRepository*-Interface von Spring Data genutzt.
+
+## 5. Sicherheit
+Um den Microservice abzusichern, wird Spring Security eingesetzt.
+
+## 6. Dokumentation
+
+## 7. Teststruktur
+
+## 8. Lokales Starten der Anwendung
 Um den Monolith im Zusammenspiel mit dem Microservice lokal zu testen, müssen zunächst folgende Git-Repositories ausgecheckt werden:
 
 https://gitlab.com/filcasidy/monolith (Monolith)
