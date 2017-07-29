@@ -46,8 +46,10 @@ Auf dem Server (Microservice) ist ein *AuthenticationProvider* implementiert, de
 Um die Passwörter verschlüsselt zu speichern, wird der *BCryptPasswordEncoder* von Spring Security verwendet. So stehen die Passwörter nicht als Klartext in der Datenbank und können nicht einfach ausgelesen werden.
 
 ## 6. Dokumentation
+Jede (public) Methode ist mit JavaDoc annotiert. Durch das Generieren des JavaDoc´s kann die Public-API gelesen werden. Zusätzlich können in dem Microservice alle REST-Routen mit Hilfe des Framework Swagger angeschaut werden.
 
 ## 7. Teststruktur
+Der Monolith und der Microservice (MonolithUserManagement) wurden prototypisch mit Hilfe des Frameworks Pact (https://docs.pact.io/) getestet. Das Testframework unterstützt das "Consumer-Driven Contracts" Pattern. Der Consumer ist der Monolith und der Provider ist der Microservice. Es wurde die Route *getUser()* getestet. Der Test befindet sich unter src/test/java/de/mstock/monolith/web/EditUserControllerTest.java. Dadurch wird der Contract generiert, der sich unter src/test/resources/pacts/ befindet. Der generierte Contract wird bei dem Provider im Test unter src/test/java/com/monolith/controller/UserControllerTest.java getestet.
 
 ## 8. Lokales Starten der Anwendung
 Um den Monolith im Zusammenspiel mit dem Microservice lokal zu testen, müssen zunächst folgende Git-Repositories ausgecheckt werden:
